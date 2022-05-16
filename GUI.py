@@ -6,7 +6,6 @@ pygame.font.init()
 
 
 class Grid:
-    # To change the starting board change this
     response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
     board = response.json()['board']
 
@@ -152,7 +151,7 @@ def format_time(secs):
 
 def main():
     win = pygame.display.set_mode((540,600))
-    pygame.display.set_caption("Sudoku")
+    pygame.display.set_caption("Sudoku Oyunu")
     board = Grid(9, 9, 540, 540)
     key = None
     run = True
