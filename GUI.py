@@ -13,6 +13,7 @@ running = True
 start = time.time()
 numsPos = []
 buttonsPos = []
+emptySlots = []
 myfont = pygame.font.SysFont('Comic Sans MS', 35)
 window = pygame.display.set_mode((Width, Height))
 pygame.display.set_caption(title)
@@ -30,13 +31,20 @@ def decideNumsPos(numsPos):
     for i in range(9):
         for a in range(9):
             numsPos.append([48*(i+1), 48*(a+1)])
-
+def checkEmpty(grid,emptySlots):
+    for i in range(9):
+        for j in range(9):
+            if grid[i][j]==0:
+                emptySlots.append([i, j])
+def clicked(mousePos, key):
+    pass
 def getButtonPos():
     pass
 def board():
     for i in range(9):
         for a in range(9):
             pygame.draw.rect(window, (0,0,0),[48*(i+1), 48*(a+1), 50, 50],2)
+
 
 def drawNums(grid, numsPos, font):
     a=-1
@@ -49,21 +57,23 @@ def drawNums(grid, numsPos, font):
                     a +=1
                     num = font.render(f"{i}",True,(0,0,0))
                     window.blit(num, (numsPos[a][0], numsPos[a][1]))
-def redraw_window(gameTime, font, numsPos, grid):
+def redraw_window(gameTime, font, numsPos, grid, emptySlots):
     window.fill(color)
     board()
     decideNumsPos(numsPos)
     drawKey(font)
     drawTimer(gameTime, font)
     drawNums(grid, numsPos, font)
+    checkEmpty(grid, emptySlots)
+print(grid)
 while running:
     gameTime = round(time.time()-start)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            pass
+            mouse = pygame.mouse.get_pos()
+            clicked(mouse, key)
         if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     key = 1
@@ -86,6 +96,6 @@ while running:
                 if event.key == pygame.K_ESCAPE:
                     key=None
 
-    mouse = pygame.mouse.get_pos()
-    redraw_window(gameTime, myfont, numsPos, grid)
+
+    redraw_window(gameTime, myfont, numsPos, grid, emptySlots)
     pygame.display.update()
