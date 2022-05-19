@@ -36,10 +36,15 @@ def checkEmpty(grid,emptySlots):
         for j in range(9):
             if grid[i][j]==0:
                 emptySlots.append([i, j])
-def clicked(mousePos, key):
-    pass
+def clicked(mouse, key, buttons, font, grid):
+    for i in range(9):
+        for j in range(9):
+            if mouse[0] > buttons[(i+1)*(1+j)][0] and mouse[0] > buttons[(i+1)*(1+j)][1] and mouse[1] > buttons[(i+1)*(1+j)][2] and mouse[1] > buttons[(i+1)*(1+j)][3]:
+                grid[j][i]=key
 def getButtonPos(buttons):
-    pass
+    for i in range(9):
+        for a in range(9):
+            buttons.append([48*(i+1), (48*(i+1))+48, 48*(a+1), (48*(a+1))+48])
 def board():
     for i in range(9):
         for a in range(9):
@@ -74,8 +79,7 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = pygame.mouse.get_pos()
-            print(buttons)
-            clicked(mouse, key)
+            clicked(mouse, key, buttons, myfont, grid)
         if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     key = 1
