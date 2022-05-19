@@ -12,6 +12,7 @@ color = (239, 234, 216)
 running = True
 start = time.time()
 numsPos = []
+buttonsPos = []
 myfont = pygame.font.SysFont('Comic Sans MS', 35)
 window = pygame.display.set_mode((Width, Height))
 pygame.display.set_caption(title)
@@ -29,6 +30,9 @@ def decideNumsPos(numsPos):
     for i in range(9):
         for a in range(9):
             numsPos.append([48*(i+1), 48*(a+1)])
+
+def getButtonPos():
+    pass
 def board():
     for i in range(9):
         for a in range(9):
