@@ -12,7 +12,7 @@ color = (239, 234, 216)
 running = True
 start = time.time()
 numsPos = []
-buttonsPos = []
+buttons = []
 emptySlots = []
 myfont = pygame.font.SysFont('Comic Sans MS', 35)
 window = pygame.display.set_mode((Width, Height))
@@ -38,7 +38,7 @@ def checkEmpty(grid,emptySlots):
                 emptySlots.append([i, j])
 def clicked(mousePos, key):
     pass
-def getButtonPos():
+def getButtonPos(buttons):
     pass
 def board():
     for i in range(9):
@@ -57,15 +57,16 @@ def drawNums(grid, numsPos, font):
                     a +=1
                     num = font.render(f"{i}",True,(0,0,0))
                     window.blit(num, (numsPos[a][0], numsPos[a][1]))
-def redraw_window(gameTime, font, numsPos, grid, emptySlots):
+def redraw_window(gameTime, font, numsPos, grid, emptySlots, buttons):
     window.fill(color)
     board()
+    getButtonPos(buttons)
     decideNumsPos(numsPos)
     drawKey(font)
     drawTimer(gameTime, font)
     drawNums(grid, numsPos, font)
     checkEmpty(grid, emptySlots)
-print(grid)
+
 while running:
     gameTime = round(time.time()-start)
     for event in pygame.event.get():
@@ -73,6 +74,7 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse = pygame.mouse.get_pos()
+            print(buttons)
             clicked(mouse, key)
         if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
@@ -97,5 +99,5 @@ while running:
                     key=None
 
 
-    redraw_window(gameTime, myfont, numsPos, grid, emptySlots)
+    redraw_window(gameTime, myfont, numsPos, grid, emptySlots, buttons)
     pygame.display.update()
