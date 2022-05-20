@@ -1,3 +1,4 @@
+#not: meb interneti ile çalışmaz, keyi sıfır yaparsanız sayıyı siler
 import pygame
 import time
 import requests
@@ -57,6 +58,7 @@ def game():
     response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
     defgrid = response.json()['board']
     grid = response.json()['board']
+    emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     pygame.init()
     Width = 540
     Height = 580
@@ -71,8 +73,19 @@ def game():
     window = pygame.display.set_mode((Width, Height))
     pygame.display.set_caption(title)
     window.fill(color)
-    key= None
-
+    key= 0
+    def resetBut(mouse):
+        pygame.draw.rect(window, (81,74,74), (217,9,100,37.5),0)
+        pygame.draw.rect(window, (0,0,0), (217,9,100,37.5),4)
+        myfont2 = pygame.font.SysFont('Comic Sans MS', 30)
+        text1 = myfont2.render("Reset", True, (0,0,0))
+        window.blit(text1, (224, 7))
+        if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
+            pygame.draw.rect(window, (43,39,39), (217,9,100,37.5),0)
+            pygame.draw.rect(window, (0,0,0), (217,9,100,37.5),4)
+            myfont2 = pygame.font.SysFont('Comic Sans MS', 30)
+            text1 = myfont2.render("Reset", True, (0,0,0))
+            window.blit(text1, (224, 7))
     def drawTimer(gameTime, font):
         timer= font.render(f"Time: {gameTime}",True, (0,0,0))
         window.blit(timer, (350, 500))
@@ -89,7 +102,7 @@ def game():
             for j in range(9):
                 if grid[i][j]==0:
                     emptySlots.append([i, j])
-    def clicked(mouse, key, buttons, font, grid, defgrid):
+    def clicked(mouse, key, buttons, font, grid, defgrid, emptyGrid):
         a=-1
         for i in range(9):
             for j in range(9):
@@ -99,6 +112,7 @@ def game():
                         continue
                     else:
                         grid[i][j]=key
+                        emptyGrid[i][j]=key
     def getButtonPos(buttons):
         for i in range(9):
             for a in range(9):
@@ -119,49 +133,50 @@ def game():
                     else:
                         a +=1
                         num = font.render(f"{i}",True,(0,0,0))
-                        window.blit(num, (numsPos[a][0], numsPos[a][1]))
-    def redraw_window(gameTime, font, numsPos, grid, emptySlots, buttons):
+                        window.blit(num, (int(numsPos[a][0])+9, numsPos[a][1]))
+    def drawNewNums(emptyGrid, numsPos):
+        a=-1
+        for b in range(9):
+                for i in emptyGrid[b]:
+                    if i == 0 :
+                        a +=1
+                        continue
+                    else:
+                        a +=1
+                        myfont3 = pygame.font.SysFont('Comic Sans MS', 35)
+                        num = myfont3.render(f"{i}",True,(156,154,154))
+                        window.blit(num, (int(numsPos[a][0])+9, numsPos[a][1]))
+
+    def redraw_window(gameTime, font, numsPos, grid, emptySlots, buttons, mouse, emptyGrid):
         window.fill(color)
         board()
+        resetBut(mouse)
         getButtonPos(buttons)
         decideNumsPos(numsPos)
         drawKey(font)
         drawTimer(gameTime, font)
         drawNums(grid, numsPos, font)
+        drawNewNums(emptyGrid, numsPos)
         checkEmpty(grid, emptySlots)
 
     while running:
         gameTime = round(time.time()-start)
+        mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse = pygame.mouse.get_pos()
-                clicked(mouse, key, buttons, myfont, grid, defgrid)
+                clicked(mouse, key, buttons, myfont, grid, defgrid, emptyGrid)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
+                    game()
+                    running=False
             if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_1:
-                        key = 1
-                    if event.key == pygame.K_2:
-                        key = 2
-                    if event.key == pygame.K_3:
-                        key = 3
-                    if event.key == pygame.K_4:
-                        key = 4
-                    if event.key == pygame.K_5:
-                        key = 5
-                    if event.key == pygame.K_6:
-                        key = 6
-                    if event.key == pygame.K_7:
-                        key = 7
-                    if event.key == pygame.K_8:
-                        key = 8
-                    if event.key == pygame.K_9:
-                        key = 9
-                    if event.key == pygame.K_ESCAPE:
-                        key=None
+                if(-1 < event.key - 48 <10):
+                    key=event.key-48
 
 
-        redraw_window(gameTime, myfont, numsPos, grid, emptySlots, buttons)
+        redraw_window(gameTime, myfont, numsPos, grid, emptySlots, buttons, mouse, emptyGrid)
         pygame.display.update()
 
 menu()
