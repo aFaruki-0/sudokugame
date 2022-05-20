@@ -1,4 +1,4 @@
-#not: meb interneti ile çalışmaz, keyi sıfır yaparsanız sayıyı siler
+#note: the code doesn't work with MEB network and For delete number do key zero.
 import pygame
 import time
 import requests
@@ -19,9 +19,9 @@ def menu(response):
         pygame.draw.rect(window, (0,0,0), (175,200,200,75),4)
         pygame.draw.rect(window, (81,74,74), (175,300,200,75),0)
         pygame.draw.rect(window, (0,0,0), (175,300,200,75),4)
-        text1 = myfont.render("Başla", True, (0,0,0))
-        text2 = myfont.render("Çıkış", True, (0,0,0))
-        text3 = myfont.render("Sudoku Oyunu", True, (0,0,0))
+        text1 = myfont.render("Start", True, (0,0,0))
+        text2 = myfont.render("Quit", True, (0,0,0))
+        text3 = myfont.render("Sudoku Game", True, (0,0,0))
         window.blit(text1, (225, 210))
         window.blit(text2, (225, 310))
         window.blit(text3, (168, 100))
@@ -29,12 +29,12 @@ def menu(response):
         if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 200 and mouse[1] < 275:
             pygame.draw.rect(window, (43,39,39), (175,200,200,75),0)
             pygame.draw.rect(window, (0,0,0), (175,200,200,75),4)
-            text1 = myfont.render("Başla", True, (0,0,0))
+            text1 = myfont.render("Start", True, (0,0,0))
             window.blit(text1, (225, 210))
         if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 300 and mouse[1] < 375:
             pygame.draw.rect(window, (43,39,39), (175,300,200,75),0)
             pygame.draw.rect(window, (0,0,0), (175,300,200,75),4)
-            text2 = myfont.render("Çıkış", True, (0,0,0))
+            text2 = myfont.render("Quit", True, (0,0,0))
             window.blit(text2, (225, 310))      
     def redraw_window(myfont, window,mouse):
         window.fill(color)
