@@ -2,8 +2,8 @@
 import pygame
 import time
 import requests
-
-def menu():
+response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
+def menu(response):
     pygame.init()
     Width = 540
     Height = 580
@@ -47,15 +47,15 @@ def menu():
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 200 and mouse[1] < 275:
-                    game()
+                    game(response)
                     running=False
                 if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 300 and mouse[1] < 375:
                     running=False
             redraw_window(myfont, window, mouse)
             pygame.display.update()
 
-def game():
-    response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
+def game(response):
+    
     defgrid = response.json()['board']
     grid = response.json()['board']
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
@@ -169,7 +169,7 @@ def game():
                 clicked(mouse, key, buttons, myfont, grid, defgrid, emptyGrid)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
-                    game()
+                    game(response)
                     running=False
             if event.type == pygame.KEYDOWN:
                 if(-1 < event.key - 48 <10):
@@ -179,4 +179,4 @@ def game():
         redraw_window(gameTime, myfont, numsPos, grid, emptySlots, buttons, mouse, emptyGrid)
         pygame.display.update()
 
-menu()
+menu(response)
