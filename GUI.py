@@ -1,8 +1,8 @@
 #note: the code doesn't work with MEB network and For delete number do key zero.
 import pygame
 import time
-import requests
-response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
+import solver
+response = solver.response
 def menu(response):
     pygame.init()
     Width = 540
@@ -169,8 +169,8 @@ def game(response):
                 clicked(mouse, key, buttons, myfont, grid, defgrid, emptyGrid)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
-                    game(response)
-                    running=False
+                    emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
+                    grid=response.json()['board']
             if event.type == pygame.KEYDOWN:
                 if(-1 < event.key - 48 <10):
                     key=event.key-48
