@@ -1,7 +1,7 @@
 import requests
 import numpy as np
 response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
-board=np.array(response.json()['board'])
+board=response.json()['board']
 def solve(board):
     findEmpty = emptyCell(board)
     
@@ -44,4 +44,4 @@ def emptyCell(board):
                 return (row,column)
     return None
 solve(board)
-print(board)
+print(np.array(board))
