@@ -44,4 +44,3 @@ def emptyCell(board):
                 return (row,column)
     return None
 solve(board)
-print(np.array(board))
