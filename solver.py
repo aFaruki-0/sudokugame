@@ -1,7 +1,7 @@
-import requests
+import generator
 import numpy as np
-response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
-board=np.array(response.json()['board'])
+generator.generate()
+board=generator.grid
 def solve(board):
     findEmpty = emptyCell(board)
     
