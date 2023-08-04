@@ -1,4 +1,4 @@
-#note: the code doesn't work with MEB network and For delete number do key zero.
+#note: For delete number do key zero.
 import pygame
 import time
 import solver
