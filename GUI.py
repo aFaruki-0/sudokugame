@@ -2,8 +2,8 @@
 import pygame
 import time
 import solver
-response = solver.response
-def menu(response):
+board = solver.board
+def menu(board):
     pygame.init()
     Width = 540
     Height = 580
@@ -47,17 +47,17 @@ def menu(response):
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 200 and mouse[1] < 275:
-                    game(response)
+                    game(board)
                     running=False
                 if mouse[0] < 375 and mouse[0] > 175 and mouse[1] > 300 and mouse[1] < 375:
                     running=False
             redraw_window(myfont, window, mouse)
             pygame.display.update()
 
-def game(response):
+def game(board):
     
-    defgrid = response.json()['board']
-    grid = response.json()['board']
+    defgrid = board
+    grid = board
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     pygame.init()
     Width = 540
@@ -170,7 +170,7 @@ def game(response):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
                     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
-                    grid=response.json()['board']
+                    grid=board.json()['board']
             if event.type == pygame.KEYDOWN:
                 if(-1 < event.key - 48 <10):
                     key=event.key-48
@@ -179,4 +179,4 @@ def game(response):
         redraw_window(gameTime, myfont, numsPos, grid, emptySlots, buttons, mouse, emptyGrid)
         pygame.display.update()
 
-menu(response)
+menu(board)
