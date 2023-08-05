@@ -1,11 +1,7 @@
 from random import randrange
 import generator
 generator.generate()
-def printGrid():
-    for i in board:
-        print(i)
-    print('------------------------------------')
-def makeEmptyCell(board):
+def printGrid(board):
     for i in range(50):
         x = randrange(9)
         y = randrange(9)

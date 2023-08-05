@@ -28,7 +28,11 @@ def generate():
             grid[row][col] = 0
 
     return False
-
+def makeEmptyCell():
+    for i in range(50):
+        x = random.randrange(9)
+        y = random.randrange(9)
+        grid[x][y]=0
 
 def valid(grid, num, pos):
     for i in range(len(grid[0])):
