@@ -104,7 +104,7 @@ def menuFinish(time):
             redraw_window(myfont, window, mouse)
             pygame.display.update()
 def game():
-    boards =[[0,0,0,0,0,0,0,0,0],
+    grid =[[0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0],
@@ -115,10 +115,9 @@ def game():
       [0,0,0,0,0,0,0,0,0]]
     import solver
     import generator
-    generator.generate(boards)
-    generator.makeEmptyCell(boards)    
-    defgrid = boards
-    grid = boards
+    generator.generate(grid)
+    generator.makeEmptyCell(grid)    
+    defgrid = grid
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     pygame.init()
     Width = 540
