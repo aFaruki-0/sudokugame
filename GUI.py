@@ -104,20 +104,9 @@ def menuFinish(time):
             redraw_window(myfont, window, mouse)
             pygame.display.update()
 def game():
-    grid =[[0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0]]
-    import solver
     import generator
-    generator.generate(grid)
-    generator.makeEmptyCell(grid)    
-    defgrid = grid
+    grid=generator.grid1   
+    defgrid = generator.grid2 
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     pygame.init()
     Width = 540
@@ -186,14 +175,14 @@ def game():
     def drawNums(grid, numsPos, font):
         a=-1
         for b in range(9):
-                for i in grid[b]:
-                    if i == 0 :
-                        a +=1
-                        continue
-                    else:
-                        a +=1
-                        num = font.render(f"{i}",True,(0,0,0))
-                        window.blit(num, (int(numsPos[a][0])+9, numsPos[a][1]))
+            for i in grid[b]:
+                if i == 0 :
+                    a +=1
+                    continue
+                else:
+                    a +=1
+                    num = font.render(f"{i}",True,(0,0,0))
+                    window.blit(num, (int(numsPos[a][0])+9, numsPos[a][1]))
     def drawNewNums(emptyGrid, numsPos):
         a=-1
         for b in range(9):
@@ -234,7 +223,7 @@ def game():
             if event.type == pygame.KEYDOWN:
                 if(-1 < event.key - 48 <10):
                     key=event.key-48
-            if grid==1:
+            if grid==generator.grid:
                 running=False
                 menuFinish(gameTime)
 

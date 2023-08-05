@@ -1,4 +1,31 @@
 import random
+grid =[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
+grid1=[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
+grid2=[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
 nums=[1,2,3,4,5,6,7,8,9]
 def generate(grid):
     find = find_empty(grid)
@@ -11,18 +38,23 @@ def generate(grid):
         i=random.choice(nums)
         if valid(grid, i, (row, col)):
             grid[row][col] = i
+            grid1[row][col] = i
+            grid2[row][col] = i
 
             if generate(grid):
                 return True
 
             grid[row][col] = 0
+            grid1[row][col] = 0
+            grid2[row][col] = 0
 
     return False
-def makeEmptyCell(grid):
+def makeEmptyCell():
     for i in range(50):
         x = random.randrange(9)
         y = random.randrange(9)
-        grid[x][y]=0
+        grid1[x][y]=0
+        grid2[x][y]=0
 
 def valid(grid, num, pos):
     for i in range(len(grid[0])):
@@ -54,3 +86,7 @@ def find_empty(grid):
                 return (i, j)
 
     return None
+
+generate(grid)
+makeEmptyCell()
+print(grid)
