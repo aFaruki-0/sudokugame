@@ -1,17 +1,7 @@
 import random
-grid =[[0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0]]
-board=grid
 nums=[1,2,3,4,5,6,7,8,9]
-def generate():
-    find = find_empty()
+def generate(grid):
+    find = find_empty(grid)
     if not find:
         return True
     else:
@@ -22,13 +12,13 @@ def generate():
         if valid(grid, i, (row, col)):
             grid[row][col] = i
 
-            if generate():
+            if generate(grid):
                 return True
 
             grid[row][col] = 0
 
     return False
-def makeEmptyCell():
+def makeEmptyCell(grid):
     for i in range(50):
         x = random.randrange(9)
         y = random.randrange(9)
@@ -51,13 +41,13 @@ def valid(grid, num, pos):
     return True
 
 
-def printGrid():
+def printGrid(grid):
     for i in grid:
         print(i)
     print('------------------------------------')
 
 
-def find_empty():
+def find_empty(grid):
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == 0:

@@ -1,6 +1,4 @@
 from random import randrange
-import generator
-generator.generate()
 def printGrid(board):
     for i in range(50):
         x = randrange(9)

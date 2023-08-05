@@ -104,18 +104,21 @@ def menuFinish(time):
             redraw_window(myfont, window, mouse)
             pygame.display.update()
 def game():
+    boards =[[0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0]]
     import solver
-    import generator 
-    generator.generate()
-    solved1=generator.grid
-    solver.makeEmptyCell(generator.grid)
-    grid = generator.grid
-    defgrid=generator.grid
-    print(grid)
-    solver.solve(generator.board)
-    # grid=1 simdilik  
-    # defgrid = response.json()['board'] bosluklu gelicek
-    # grid = response.json()['board'] bosluklu gelicek
+    import generator
+    generator.generate(boards)
+    generator.makeEmptyCell(boards)    
+    defgrid = boards
+    grid = boards
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
     pygame.init()
     Width = 540
@@ -228,11 +231,11 @@ def game():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if mouse[0] < 317 and mouse[0] > 217 and mouse[1] > 9 and mouse[1] < 37.5:
                     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
-                    grid=generator.grid
+                    grid=board
             if event.type == pygame.KEYDOWN:
                 if(-1 < event.key - 48 <10):
                     key=event.key-48
-            if grid==solved1 or grid==generator.board:
+            if grid==1:
                 running=False
                 menuFinish(gameTime)
 
