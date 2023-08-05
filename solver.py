@@ -1,7 +1,15 @@
+from random import randrange
 import generator
-import numpy as np
 generator.generate()
-board=generator.grid
+def printGrid():
+    for i in board:
+        print(i)
+    print('------------------------------------')
+def makeEmptyCell(board):
+    for i in range(50):
+        x = randrange(9)
+        y = randrange(9)
+        board[x][y]=0
 def solve(board):
     findEmpty = emptyCell(board)
     
@@ -18,8 +26,6 @@ def solve(board):
 
         board[row][column] = 0
     return False
-             
-
 def isValid (board, num, pos):
     for i in range(9):
         if num == board[pos[0]][i]:
@@ -36,12 +42,9 @@ def isValid (board, num, pos):
             if num == board[i][j]:
                 return False 
     return True
-
 def emptyCell(board):
     for row in range(9):
         for column in range(9):
             if board[row][column] == 0:
                 return (row,column)
     return None
-solve(board)
-print(board)

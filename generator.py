@@ -8,6 +8,7 @@ grid =[[0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0]]
+board=grid
 nums=[1,2,3,4,5,6,7,8,9]
 def generate():
     find = find_empty()
@@ -59,7 +60,3 @@ def find_empty():
                 return (i, j)
 
     return None
-
-printGrid()
-generate()
-printGrid()
