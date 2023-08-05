@@ -27,8 +27,36 @@ grid2=[[0,0,0,0,0,0,0,0,0],
        [0,0,0,0,0,0,0,0,0],
        [0,0,0,0,0,0,0,0,0]]
 nums=[1,2,3,4,5,6,7,8,9]
-def generate(grid):
-    find = find_empty(grid)
+def makeAllGridsEmpty(grid,grid1,grid2):
+    grid =[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
+    grid1=[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
+    grid2=[[0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0],
+       [0,0,0,0,0,0,0,0,0]]
+def generate():
+    find = find_empty()
     if not find:
         return True
     else:
@@ -36,12 +64,12 @@ def generate(grid):
 
     for y in range(9):
         i=random.choice(nums)
-        if valid(grid, i, (row, col)):
+        if valid( i, (row, col)):
             grid[row][col] = i
             grid1[row][col] = i
             grid2[row][col] = i
 
-            if generate(grid):
+            if generate():
                 return True
 
             grid[row][col] = 0
@@ -56,7 +84,7 @@ def makeEmptyCell():
         grid1[x][y]=0
         grid2[x][y]=0
 
-def valid(grid, num, pos):
+def valid( num, pos):
     for i in range(len(grid[0])):
         if grid[pos[0]][i] == num and pos[1] != i:
             return False
@@ -79,7 +107,7 @@ def printGrid(grid):
     print('------------------------------------')
 
 
-def find_empty(grid):
+def find_empty():
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == 0:
@@ -87,6 +115,4 @@ def find_empty(grid):
 
     return None
 
-generate(grid)
-makeEmptyCell()
-print(grid)
+

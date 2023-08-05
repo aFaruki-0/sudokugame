@@ -105,6 +105,10 @@ def menuFinish(time):
             pygame.display.update()
 def game():
     import generator
+    generator.makeAllGridsEmpty(generator.grid,generator.grid1,generator.grid2)
+    generator.generate()
+    generator.makeEmptyCell()
+    generator.printGrid(generator.grid)
     grid=generator.grid1   
     defgrid = generator.grid2 
     emptyGrid=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]]
